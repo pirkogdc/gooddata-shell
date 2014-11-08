@@ -30,7 +30,7 @@ public class ProcessCommand extends AbstractGoodDataCommand {
         super(holder);
     }
 
-    @CliAvailabilityIndicator({"process upload", "process download", "process list", "process execute"})
+    @CliAvailabilityIndicator({"process upload", "process download", "process list", "process execute", "process execution"})
     public boolean isAvailable() {
         return holder.hasCurrentProject();
     }
@@ -103,5 +103,22 @@ public class ProcessCommand extends AbstractGoodDataCommand {
         }
         return result;
     }
+
+    /*@CliCommand(value = "process execution", help = "Get process execution")
+    public String execution(@CliOption(key = {"execution", ""}, mandatory = true, help = "Execution URI") final String executionUri,
+                          @CliOption(key = {"log"}, mandatory = false, help = "Show execution log",
+                                  unspecifiedDefaultValue = "false", specifiedDefaultValue = "false") final boolean log) {
+        final ProcessService service = getGoodData().getProcessService();
+        final DataloadProcess process = service.getProcessByUri(processUri);
+        final ProcessExecutionDetail detail = service.executeProcess(new ProcessExecution(process, executable)).get();
+        System.out.println(detail.getUri());
+        String result = "Status: " + detail.getStatus();
+        if (log) {
+            final ByteArrayOutputStream out = new ByteArrayOutputStream();
+            service.getExecutionLog(detail, out);
+            result += "\n" + out.toString();
+        }
+        return result;
+    }*/
 
 }
